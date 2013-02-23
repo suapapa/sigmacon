@@ -1,0 +1,3 @@
+[submodule "emsuinput"]
+	path = emsuinput
+	url = https://github.com/suapapa/emsuinput

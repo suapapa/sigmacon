@@ -1,6 +1,8 @@
 #include <iostream>
 #include <libusb.h>
 
+#include "emsuinput/src/emsuinput.h"
+
 #define SIGMACON_VID 0x10c8
 #define SIGMACON_PID 0x0910
 
@@ -51,6 +53,9 @@ int main()
         return 1;
     }
 
+    emsuinput_context* ui_ctx = emsuinput_new_context("sigmacon",
+                                NULL, 0, NULL, 0);
+
     unsigned char code_in[8] = { 0 };
     int len = 0;
     while (1) {
@@ -74,6 +79,7 @@ int main()
     }
     cout << "Released Interface" << endl;
 
+    emsuinput_release_context(ui_ctx);
     libusb_close(dev_hdl); //close the device we opened
     libusb_exit(ctx); //needs to be called to end the
 

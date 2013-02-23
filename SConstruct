@@ -1,5 +1,6 @@
 env = Environment()
+env.SConscript('emsuinput/SConstruct')
 env.ParseConfig('pkg-config --cflags --libs libusb-1.0')
-env.Program('test', 'sigmacon.cpp')
+env.Program('sigmacon', ['sigmacon.cpp', 'emsuinput/libemsuinput.a'])
 
-# Program("multi_remocon_rcv_test.c", LIBS=["usb"])
+Default('sigmacon')
