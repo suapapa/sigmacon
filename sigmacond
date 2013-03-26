@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+        sigmacon&
+        ;;  
+  restart|reload|force-reload)
+        echo "Error: argument '$1' not supported" >&2
+        exit 3
+        ;;  
+  stop)
+        killall sigmacon > /dev/null
+        ;;  
+  *)  
+        echo "Usage: $0 start|stop" >&2
+        exit 3
+        ;;  
+esac
